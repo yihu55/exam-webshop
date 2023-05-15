@@ -9,6 +9,8 @@ import {
   Query,
   NotFoundException,
   UseGuards,
+  UsePipes,
+  ValidationPipe,
 } from '@nestjs/common';
 import { ProductService } from './product.service';
 import { CreateProductDTO } from './dtos/create-product.dto';
@@ -22,7 +24,7 @@ import { JwtAuthGuard } from 'src/auth/guards/jwt.guard';
 export class ProductController {
   constructor(private productService: ProductService) {}
 
-  @Get('/')
+  @Get('/filter')
   async getProducts(@Query() filterProductDTO: FilterProductDTO) {
     if (Object.keys(filterProductDTO).length) {
       const filteredProducts = await this.productService.getFilteredProducts(
@@ -35,6 +37,12 @@ export class ProductController {
     }
   }
 
+  @Get('/')
+  async getAllProducts() {
+    const allProducts = await this.productService.getAllProducts();
+    return allProducts;
+  }
+
   @Get('/:id')
   async getProduct(@Param('id') id: string) {
     const product = await this.productService.getProduct(id);
@@ -45,6 +53,7 @@ export class ProductController {
   @UseGuards(JwtAuthGuard, RolesGuard)
   @Roles(Role.Admin)
   @Post('/')
+  @UsePipes(ValidationPipe)
   async addProduct(@Body() createProductDTO: CreateProductDTO) {
     const product = await this.productService.addProduct(createProductDTO);
     return product;

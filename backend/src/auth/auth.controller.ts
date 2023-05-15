@@ -7,7 +7,6 @@ import {
   UseGuards,
   Patch,
   NotFoundException,
-  Param,
 } from '@nestjs/common';
 import { CreateUserDTO } from 'src/user/dtos/create-user.dto';
 import { UserService } from 'src/user/user.service';
@@ -17,9 +16,6 @@ import { JwtAuthGuard } from './guards/jwt.guard';
 import { Roles } from './decorators/roles.decorator';
 import { Role } from './enums/role.enum';
 import { RolesGuard } from './guards/roles.guard';
-import { GetCurrentUserById } from 'src/utils/get-user-by-id.decorator';
-import { AppService } from '../app.service';
-import { User } from 'src/user/schemas/user.schema';
 import { GetCurrentUsersId } from 'src/utils/get-user-id.decorator';
 import { UpdateUserDTO } from 'src/user/dtos/update-user.dto';
 
@@ -42,14 +38,6 @@ export class AuthController {
     return this.authService.login(req.user);
   }
 
-  // @UseGuards(JwtAuthGuard)
-  // //, RolesGuard)
-  // // @Roles(Role.User)
-  // @Get('/profile')
-  // getCurrentUserProfile(@GetCurrentUserById() userId: string) {
-  //   return userId;
-  // }
-
   @UseGuards(JwtAuthGuard, RolesGuard)
   @Roles(Role.User)
   @Get('/profile')
@@ -68,7 +56,6 @@ export class AuthController {
   @UseGuards(JwtAuthGuard)
   @Patch('/update')
   async updateProfile(
-    // @Param('id') _id: string,
     @GetCurrentUsersId() userId: string,
     @Body() updateUserDTO: UpdateUserDTO,
   ) {

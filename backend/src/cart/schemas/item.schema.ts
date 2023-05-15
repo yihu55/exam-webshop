@@ -9,7 +9,6 @@ export class Item {
   productId: string;
 
   @Prop()
-  // name: string;
   title: string;
 
   @Prop()

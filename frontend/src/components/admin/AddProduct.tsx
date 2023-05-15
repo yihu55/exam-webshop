@@ -2,15 +2,15 @@ import axios from "axios";
 import React, { useState } from "react";
 import { Button, Form, Modal } from "react-bootstrap";
 import Product from "../../interfaces/Product";
-import { v4 as uuidv4 } from "uuid";
+// import { v4 as uuidv4 } from "uuid";
 type addProductProps = {
   show: boolean;
   handleClose: () => void;
 };
 
-function generateId() {
-  return uuidv4().toString();
-}
+// function generateId() {
+//   return uuidv4().toString();
+// }
 
 export default function AddProduct({ show, handleClose }: addProductProps) {
   const [title, setTitle] = useState<string>("");

@@ -1,3 +1,0 @@
-remove git repo after cloning from github
-
-rmdir .git 

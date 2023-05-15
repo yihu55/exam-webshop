@@ -38,6 +38,7 @@ type ShoppingCartContext = {
   fetchOrders: () => void;
 };
 
+// eslint-disable-next-line @typescript-eslint/no-redeclare
 const ShoppingCartContext = createContext({} as ShoppingCartContext);
 
 export function useShoppingCart() {
@@ -54,7 +55,6 @@ export function ShoppingCartProvider({ children }: ShoppingCartProviderProps) {
 
   const headers = {
     headers: {
-      // "Content-Type": "application/json",
       Authorization: `Bearer ${token}`,
     },
   };
@@ -72,7 +72,6 @@ export function ShoppingCartProvider({ children }: ShoppingCartProviderProps) {
       const cart = response.data;
       setCart(cart);
       setCartItems(cart?.items || []);
-      // return cart;
     } catch (err) {
       console.log("error");
     }
@@ -128,7 +127,6 @@ export function ShoppingCartProvider({ children }: ShoppingCartProviderProps) {
     };
     try {
       await axios.delete("/cart/delete-one", {
-        // headers: headers.headers,
         data: cartItem,
       });
       fetchCart();
@@ -139,7 +137,6 @@ export function ShoppingCartProvider({ children }: ShoppingCartProviderProps) {
   const removeFromCart = async (_id: string): Promise<void> => {
     try {
       await axios.delete("/cart/delete", {
-        // headers: headers.headers,
         data: { productId: _id },
       });
     } catch (err) {

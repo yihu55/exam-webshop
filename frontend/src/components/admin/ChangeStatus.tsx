@@ -1,8 +1,8 @@
 import axios from "axios";
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { Form } from "react-bootstrap";
 import { Status } from "../../enums/Status";
-import AllOrders from "./AllOrders";
+
 type changeStatusProps = {
   id: string | undefined;
   status: Status;

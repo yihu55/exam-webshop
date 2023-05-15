@@ -15,9 +15,9 @@ type ProductProviderProps = {
 
 type ProductContext = {
   products: Product[];
-  // product: Product | undefined;
 };
 
+// eslint-disable-next-line @typescript-eslint/no-redeclare
 const ProductContext = createContext({} as ProductContext);
 
 export function useProduct() {
@@ -32,8 +32,6 @@ export function ProductProvider({ children }: ProductProviderProps) {
       const response = await axios.get<Product[]>(`/product`);
 
       setProducts(response.data);
-
-      // return cart;
     } catch (err) {
       console.log("error");
     }
@@ -41,14 +39,12 @@ export function ProductProvider({ children }: ProductProviderProps) {
 
   useEffect(() => {
     fetchProducts();
-    // fetchProduct();
   }, []);
 
   return (
     <ProductContext.Provider
       value={{
         products,
-        // product,
       }}
     >
       {children}

@@ -25,7 +25,7 @@ export default function Search() {
       category: category,
     };
     console.log("searchText", searchText, "filter", filter);
-    const response = await axios.get(`/product`, { params: filter });
+    const response = await axios.get(`/product/filter`, { params: filter });
 
     setFilteredProducts(response.data);
   }

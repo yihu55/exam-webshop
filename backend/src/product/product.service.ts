@@ -34,7 +34,7 @@ export class ProductService {
   }
 
   async getAllProducts(): Promise<Product[]> {
-    const products = await this.productModel.find().exec();
+    const products = await this.productModel.find({}).exec();
     return products;
   }
 

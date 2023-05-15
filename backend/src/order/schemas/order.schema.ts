@@ -1,8 +1,6 @@
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
-import { Document, SchemaType, SchemaTypes } from 'mongoose';
+import { Document, SchemaTypes } from 'mongoose';
 import { Status } from '../enums/status.enum';
-
-// import { Cart } from '../../cart/schemas/cart.schema';
 
 export type OrderDocument = Order & Document;
 

@@ -42,6 +42,7 @@ export class OrderController {
     @Body() createOrderDTO: CreateOrderDTO,
   ) {
     const order = await this.orderService.create(userId, createOrderDTO);
+
     return { message: 'order created', order };
   }
 

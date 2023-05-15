@@ -18,9 +18,6 @@ function App() {
     process.env.REACT_APP_WEBSHOP_API || "http://localhost:4000";
 
   axios.interceptors.request.use((config) => {
-    // if (!config?.headers) {
-    //   config.headers = {};
-    // }
     const jwt = localStorage.getItem("webshop");
     if (jwt) {
       config.headers["authorization"] = `Bearer ${jwt}`;

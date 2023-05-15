@@ -39,11 +39,11 @@ export class OrderService {
 
   async create(userId: string, createOrderDTO: CreateOrderDTO): Promise<Order> {
     const cart = await this.cartModel.findById(createOrderDTO.orderId).exec();
-    const total = (await cart.totalPrice) + createOrderDTO.shippingCost;
+    const total = cart.totalPrice + createOrderDTO.shippingCost;
 
     if (cart) {
-      const createOrder = await new this.orderModel({
-        userId,
+      const createOrder = new this.orderModel({
+        userId: userId,
         orderId: createOrderDTO.orderId,
         address: createOrderDTO.address,
         shippingCost: createOrderDTO.shippingCost,

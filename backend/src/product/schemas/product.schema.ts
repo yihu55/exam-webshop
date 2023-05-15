@@ -5,9 +5,6 @@ export type ProductDocument = Product & Document;
 
 @Schema()
 export class Product {
-  // @Prop()
-  // name: string;
-
   @Prop()
   title: string;
 

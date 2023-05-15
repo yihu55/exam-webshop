@@ -5,13 +5,10 @@ import {
   UseGuards,
   Delete,
   NotFoundException,
-  Param,
   Get,
 } from '@nestjs/common';
-import { Roles } from 'src/auth/decorators/roles.decorator';
-import { Role } from 'src/auth/enums/role.enum';
+
 import { JwtAuthGuard } from 'src/auth/guards/jwt.guard';
-import { RolesGuard } from 'src/auth/guards/roles.guard';
 import { GetCurrentUsersId } from 'src/utils/get-user-id.decorator';
 import { CartService } from './cart.service';
 import { ItemDTO } from './dtos/item.dto';
@@ -41,8 +38,6 @@ export class CartController {
 
   // delete products with same productid
   @UseGuards(JwtAuthGuard)
-  //, RolesGuard)
-  // @Roles(Role.User)
   @Delete('/delete')
   async removeItemFromCart(
     @GetCurrentUsersId() userId: string,
@@ -55,8 +50,6 @@ export class CartController {
 
   // delete a single item from cart
   @UseGuards(JwtAuthGuard)
-  //, RolesGuard)
-  // @Roles(Role.User)
   @Delete('/delete-one')
   async removeOneItem(
     @GetCurrentUsersId() userId: string,
@@ -76,13 +69,4 @@ export class CartController {
     const deleteCart = await this.cartService.deleteCart(_id);
     return deleteCart;
   }
-
-  // @UseGuards(JwtAuthGuard, RolesGuard)
-  // @Roles(Role.User)
-  // @Delete('/:id')
-  // async deleteCart(@Param('id') userId: string) {
-  //   const cart = await this.cartService.deleteCart(userId);
-  //   if (!cart) throw new NotFoundException('Cart does not exist');
-  //   return cart;
-  // }
 }
